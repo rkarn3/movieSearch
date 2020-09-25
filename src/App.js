@@ -35,7 +35,6 @@ function App() {
       <Switch>
         <Route
           path="/"
-          exact
           component={() => <Search addFavourite={addFavourite} />}
         />
         <Route
