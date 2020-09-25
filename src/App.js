@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <nav className="navbar navbar-light bg-light">
-        <Link to="/" className="navbar-brand">
+        <Link to="/movieSearch" className="navbar-brand">
           Home
         </Link>
 
@@ -34,7 +34,8 @@ function App() {
       </nav>
       <Switch>
         <Route
-          path="/"
+          path="/movieSearch"
+          exact
           component={() => <Search addFavourite={addFavourite} />}
         />
         <Route
