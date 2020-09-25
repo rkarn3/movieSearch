@@ -7,7 +7,7 @@ const Search = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `http://www.omdbapi.com/?apikey=a57d910e&s=${query}&type=${type}`;
+    const url = `https://www.omdbapi.com/?apikey=a57d910e&s=${query}&type=${type}`;
     try {
       const res = await fetch(url);
       const data = await res.json();
