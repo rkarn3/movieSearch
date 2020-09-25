@@ -1,25 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Search from './components/Search';
+import Favourites from './components/Favourites';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
+  const [favourites, setFavourites] = useState([]);
+
+  const addFavourite = (favourite) => {
+    setFavourites([...favourites, favourite]);
+    localStorage.setItem(
+      'favourites',
+      JSON.stringify([...favourites, favourite])
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <nav className="navbar navbar-light bg-light">
+        <Link to="/" className="navbar-brand">
+          Home
+        </Link>
+
+        <form className="form-inline">
+          <Link to="/Favourites">
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
+              Favourites
+            </button>
+          </Link>
+        </form>
+      </nav>
+      <Switch>
+        <Route
+          path="/"
+          exact
+          component={() => <Search addFavourite={addFavourite} />}
+        />
+        <Route
+          path="/favourites"
+          exact
+          component={() => (
+            <Favourites
+              favourites={JSON.parse(localStorage.getItem('favourites'))}
+            />
+          )}
+        />
+      </Switch>
+    </Router>
   );
 }
 
